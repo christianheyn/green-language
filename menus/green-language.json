@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle green-language",
+        "command": "green-language:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "green-language",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "green-language:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
