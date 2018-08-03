@@ -26,9 +26,48 @@ patterns: [ # An array of individual pattern declarations.
         'name': 'comment.fullline.green'
     }
 
+
+    # {
+    #     # @feature
+    #     'match': '(@[a-zA-Z]{1,})((\\[\\])?)(.{1,}(,))+?'
+    #     #'match': '(@[a-zA-Z]{1,})((\\[\\]|{}{0,1})\\s{1,}(,))'
+    #     #'name': 'storage.type.const.green'
+    #     'captures':
+    #         '1':
+    #             'name': 'storage.type.const.green'
+    #         '2':
+    #             'name': 'keyword.operator.green'
+    #         '3':
+    #             'name': 'keyword.operator.green'
+    #         '4':
+    #             'name': 'string.quoted.green'
+    # }
+
+
+    {
+        # @feature[] word, word, word
+        'match': '(@[a-zA-Z]{1,})(\\[\\]|\\{\\}){0,}(.{1,}){0,}'
+        'captures':
+            '1':
+                'name': 'storage.type.const.green'
+            '2':
+                'name': 'keyword.operator.green'
+            '3':
+               'name': 'default.green'
+               'patterns': [
+                        {
+                            # list of tags - seperator
+                            'match': ','
+                            'name': 'keyword.operator.green'
+                        }
+                    ]
+
+
+    }
+
     {
         # @feature
-        'match': '@[a-zA-Z]{1,}'
+        'match': '(@[a-zA-Z]{1,})'
         'name': 'storage.type.const.green'
     }
 
@@ -40,7 +79,7 @@ patterns: [ # An array of individual pattern declarations.
 
     {
         # timeValues
-        'match': '(\\s)-{0,1}[.|,]{0,1}[0-9]{1,}[.|,]{0,1}[0-9]{0,}(?:(w)|(week)|(weeks)|(d)|(day)|(days)|(h)|(hour)|(hours)|(m)|(min)|(minute)|(minutes))(\\s|$)'
+        'match': '(\\s{1,})-{0,1}[.|,]{0,1}[0-9]{1,}[.|,]{0,1}[0-9]{0,}(?:(w)|(week)|(weeks)|(d)|(day)|(days)|(h)|(hour)|(hours)|(m)|(min)|(minute)|(minutes))(\\s|$)'
         'name': 'entity.name.function.green'
     }
 
