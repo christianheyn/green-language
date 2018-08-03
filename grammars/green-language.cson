@@ -1,17 +1,24 @@
-# TextMate tutorial: http://manual.macromates.com/en/language_grammars
-
-# Regex to convert keys to unquoted: '(include|match|captures|begin|end|beginCaptures|endCaptures|name|patterns|0|1|2|3|4|5|6|7|8|9|comment|fileTypes|scopeName|repository|contentName|firstLineMatch|foldingStartMarker|foldingStopMarker)':
-
-scopeName: 'source.green' # <scope> should be a short, unique indicator for the language ("js", "php", "c", etc.)
-name: 'Green' # The title that will show up in grammar selection and on your status bar.
-fileTypes: [ # An array of file extensions.
+scopeName: 'source.green'
+name: 'Green'
+fileTypes: [
   'green'
 ]
-firstLineMatch: '' # A regular expression that is matched against the first line of the document when Atom is trying to decide if the grammar is appropriate. Useful for shell scripts, mostly.
-foldingStartMarker: '' # A regular expression that checks for the start of a foldable area (such as `{`).
-foldingStopMarker: '' # A regular expression that checks for the end of a foldable area (such as `}`). If both folding markers are matched in the same line, there will be no foldable area.
-patterns: [ # An array of individual pattern declarations.
+firstLineMatch: ''
+foldingStartMarker: ''
+foldingStopMarker: ''
+patterns: [
     {
+        # import green files
+        'match': '((^|\\n)(\\s){0,}@import(\\s){1,})(.{1,}\\.green)'
+        'captures':
+            '1':
+                'name': 'keyword.import.green'
+            '5':
+                'name': 'string.quoted.green'
+    }
+
+    {
+        # @id MYID
         'match': '(@id)(\\s|\\n){1,}(\\s|\\n){0,}\\b((.){1,})\\n'
         'captures':
             '1':
@@ -26,26 +33,34 @@ patterns: [ # An array of individual pattern declarations.
         'name': 'comment.fullline.green'
     }
 
-
-    # {
-    #     # @feature
-    #     'match': '(@[a-zA-Z]{1,})((\\[\\])?)(.{1,}(,))+?'
-    #     #'match': '(@[a-zA-Z]{1,})((\\[\\]|{}{0,1})\\s{1,}(,))'
-    #     #'name': 'storage.type.const.green'
-    #     'captures':
-    #         '1':
-    #             'name': 'storage.type.const.green'
-    #         '2':
-    #             'name': 'keyword.operator.green'
-    #         '3':
-    #             'name': 'keyword.operator.green'
-    #         '4':
-    #             'name': 'string.quoted.green'
-    # }
-
+    {
+        # include "cssPaths[]" files
+        'match': '((^|\\n)(\\s){0,}@cssPaths\\[\\](\\s){1,})(.{1,}\\.css)(.{1,}){0,}'
+        'captures':
+            '1':
+                'name': 'keyword.import.green'
+            '5':
+                'name': 'string.quoted.green'
+                'patterns': [
+                        {
+                            # list of tags - seperator
+                            'match': ','
+                            'name': 'constant.other.green'
+                        }
+                    ]
+            '6':
+                'name': 'string.quoted.green'
+                'patterns': [
+                        {
+                            # list of tags - seperator
+                            'match': ','
+                            'name': 'constant.other.green'
+                        }
+                    ]
+    }
 
     {
-        # @feature[] word, word, word
+        # @list[] word, word, word
         'match': '(@[a-zA-Z]{1,})(\\[\\]|\\{\\}){0,}(.{1,}){0,}'
         'captures':
             '1':
@@ -58,41 +73,28 @@ patterns: [ # An array of individual pattern declarations.
                         {
                             # list of tags - seperator
                             'match': ','
-                            'name': 'keyword.operator.green'
+                            'name': 'constant.other.green'
                         }
                     ]
-
-
-    }
-
-    {
-        # @feature
-        'match': '(@[a-zA-Z]{1,})'
-        'name': 'storage.type.const.green'
     }
 
     {
         # forced newline
         'match': ';'
-        'name': 'keyword.operator.green'
+        'name': 'constant.other.green'
     }
 
     {
         # timeValues
-        'match': '(\\s{1,})-{0,1}[.|,]{0,1}[0-9]{1,}[.|,]{0,1}[0-9]{0,}(?:(w)|(week)|(weeks)|(d)|(day)|(days)|(h)|(hour)|(hours)|(m)|(min)|(minute)|(minutes))(\\s|$)'
-        'name': 'entity.name.function.green'
-    }
-
-    {
-        # import green files
+        'match': '(^|\\W){1}(\\d{1,})?(\\.-)?(-\\.)?(-)?(\\d{1,})((weeks)|(week)|(w)|(days)|(day)|(d)|(hours)|(hour)|(h)|(minutes)|(minute)|(m)){1}($|\\W)'
         'captures':
+            '0':
+                'name': 'entity.name.function.green'
             '1':
-                'name': 'keyword.import.green'
-            '5':
-                'name': 'string.quoted.green'
-        'match': '((^|\\n)(\\s){0,}import(\\s){1,})(.{1,}\\.green)'
+                'name': 'entity.name.function.green'
+            '2':
+                'name': 'default.green'
     }
-
 ]
 repository: # An array of rules. If you're going to be referencing one bit of code over and over again, stick it here so that you can edit all in one place.
   ruleName: # Can be anything.
