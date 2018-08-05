@@ -40,8 +40,13 @@ patterns: [ # An array of individual pattern declarations.
 
     {
         # timeValues
-        'match': '(\\s)-{0,1}[.|,]{0,1}[0-9]{1,}[.|,]{0,1}[0-9]{0,}(?:(w)|(week)|(weeks)|(d)|(day)|(days)|(h)|(hour)|(hours)|(m)|(min)|(minute)|(minutes))(\\s|$)'
-        'name': 'entity.name.function.green'
+        'match': '(\\.)?(-?[\\d]?\\.?[\\d]+\\.?[\\d]?)(w|week|weeks|d|day|days|h|hour|hours|m|minute|minutes){1}\\b'
+        # 'name': 'entity.name.function.green'
+        'captures':
+            '2':
+                'name': 'entity.name.function.green'
+            '3':
+                'name': 'string.quoted.green'
     }
 
     {
