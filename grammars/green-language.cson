@@ -96,14 +96,13 @@ patterns: [
 
     {
         # timeValues
-        'match': '(^|\\W){1}(\\d{1,})?(\\.-)?(-\\.)?(-)?(\\d{1,})((weeks)|(week)|(w)|(days)|(day)|(d)|(hours)|(hour)|(h)|(minutes)|(minute)|(m)){1}($|\\W)'
+        'match': '(\\.)?(-?[\\d]?\\.?[\\d]+\\.?[\\d]?)(w|week|weeks|d|day|days|h|hour|hours|m|minute|minutes){1}\\b'
+        # 'name': 'entity.name.function.green'
         'captures':
-            '0':
-                'name': 'entity.name.function.green'
-            '1':
-                'name': 'entity.name.function.green'
             '2':
-                'name': 'default.green'
+                'name': 'entity.name.function.green'
+            '3':
+                'name': 'string.quoted.green'
     }
 ]
 repository: # An array of rules. If you're going to be referencing one bit of code over and over again, stick it here so that you can edit all in one place.
