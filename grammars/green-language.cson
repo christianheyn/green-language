@@ -28,6 +28,16 @@ patterns: [
     }
 
     {
+        # @status MYID
+        'match': '(@status)(\\s|\\n){1,}(\\s|\\n){0,}(DONE|OPEN|RESOLVED)?\\n'
+        'captures':
+            '1':
+                'name': 'storage.type.const.green'
+            '4':
+                'name': 'entity.name.function.green'
+    }
+
+    {
         # full line comments
         'match': '(^|\\n)(\\s){0,}#(\\s){0,}(.){0,}'
         'name': 'comment.fullline.green'
