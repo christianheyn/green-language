@@ -55,7 +55,7 @@ patterns: [
                         {
                             # list of tags - seperator
                             'match': ','
-                            'name': 'constant.other.green'
+                            'name': 'keyword.operator.green'
                         }
                     ]
             '6':
@@ -64,7 +64,7 @@ patterns: [
                         {
                             # list of tags - seperator
                             'match': ','
-                            'name': 'constant.other.green'
+                            'name': 'keyword.operator.green'
                         }
                     ]
     }
@@ -83,7 +83,7 @@ patterns: [
                         {
                             # list of tags - seperator
                             'match': ','
-                            'name': 'constant.other.green'
+                            'name': 'keyword.operator.green'
                         }
                     ]
     }
@@ -91,18 +91,13 @@ patterns: [
     {
         # forced newline
         'match': ';'
-        'name': 'constant.other.green'
+        'name': 'keyword.operator.green'
     }
 
     {
         # timeValues
         'match': '(\\.)?(-?[\\d]?\\.?[\\d]+\\.?[\\d]?)(w|week|weeks|d|day|days|h|hour|hours|m|minute|minutes){1}\\b'
-        # 'name': 'entity.name.function.green'
-        'captures':
-            '2':
-                'name': 'entity.name.function.green'
-            '3':
-                'name': 'string.quoted.green'
+        'name': 'entity.name.function.green'
     }
 ]
 repository: # An array of rules. If you're going to be referencing one bit of code over and over again, stick it here so that you can edit all in one place.
